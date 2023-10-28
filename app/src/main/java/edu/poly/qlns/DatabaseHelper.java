@@ -1,5 +1,6 @@
 package edu.poly.qlns;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "diachi TEXT,"
                 + "sodienthoai TEXT,"
                 + "trinhdo TEXT,"
-                + "luongcb INTERGER,"
+                + "luongcb INTEGER,"
                 + "ngaylamviec DATE,"
                 + "chucvu TEXT,"
                 + "maphongban TEXT"
@@ -47,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Tạo bảng Chấm công
         String createChamCongTable = "CREATE TABLE ChamCong ("
                 + "manv INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "thang INTEGER PRIMARY KEY,"
+                + "thang INTEGER,"
                 + "ngaycong Date,"
                 + "ngayphep INTEGER,"
                 + "ngoaigio INTEGER"
@@ -61,5 +62,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "sdt INTEGER"
                 + ");";
         db.execSQL(createPhongBanTable);
+        // Tạo bảng Người dùng
+        String createUsersTable = "CREATE TABLE Nguoidung ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "tentk TEXT,"
+                + "matkhau TEXT"
+                + ");";
+        db.execSQL(createUsersTable);
+        addUser(db, "Nguyen van a", "12345678");
+        addUser(db, "user2", "hashed_password2");
+        addUser(db, "user3", "hashed_password3");
+
     }
+    public long addUser(SQLiteDatabase db, String username, String hashedPassword) {
+        ContentValues values = new ContentValues();
+        values.put("tentk", username);
+        values.put("matkhau", hashedPassword);
+
+        long newRowId = db.insert("Nguoidung", null, values);
+        return newRowId;
+    }
+
+
 }
