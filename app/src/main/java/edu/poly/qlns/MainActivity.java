@@ -16,13 +16,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DatabaseHelper(this);
-        db = dbHelper.getWritableDatabase();
-
-        // Tạo bảng cơ sở dữ liệu
-        dbHelper.createTables(db);
-
-        // Đưa dữ liệu mẫu vào cơ sở dữ liệu
-        insertSampleData();
+        // Chèn dữ liệu mẫu vào bảng Nguoidung
+        dbHelper.insertSampleUserData("user1", "password1");
+        dbHelper.insertSampleUserData("user2", "password2");
     }
 
     private void insertSampleData() {

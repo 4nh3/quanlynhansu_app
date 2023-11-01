@@ -88,13 +88,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long newRowId = db.insert("Nguoidung", null, values);
         return newRowId;
     }
-    public void insertSampleUserData() {
+    public void insertSampleUserData(String tentk, String matkhau) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("tentk", "user1");
-        values.put("matkhau", "password1");
+        values.put("tentk", tentk);
+        values.put("matkhau", matkhau);
         db.insert("Nguoidung", null, values);
         db.close();
     }
+
 
 }

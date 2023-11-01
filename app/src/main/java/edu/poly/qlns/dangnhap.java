@@ -78,6 +78,9 @@ public class dangnhap extends AppCompatActivity {
             // Kiểm tra xem dữ liệu có tồn tại trong cơ sở dữ liệu hay không
             if (cursor.moveToFirst()) {
                 // Đăng nhập thành công
+                // Chuyển đến trang đổi mật khẩu và chuyển tên tài khoản đăng nhập qua Intent
+                Intent intent = new Intent(dangnhap.this, MainActivity.class);
+                startActivity(intent);
                 cursor.close();
                 db.close();
                 return true;
