@@ -1,11 +1,14 @@
 package edu.poly.qlns;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,8 +31,11 @@ public class dangnhap extends AppCompatActivity {
 
         // Khởi tạo DatabaseHelper
         dbHelper = new DatabaseHelper(this);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+// Thêm người dùng mẫu sau khi đăng nhập thành công
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        addUser(db, "nguyenvana", "1234");
+        addUser(db, "user2", "hashed_password2");
+        addUser(db, "user3", "hashed_password3");        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Lấy thông tin đăng nhập từ người dùng
@@ -46,28 +52,46 @@ public class dangnhap extends AppCompatActivity {
                 }
             }
         });
+
+        TextView forgotPasswordTextView = findViewById(R.id.textView6);
+        forgotPasswordTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Lấy tên tài khoản đăng nhập
+                String username = etEmail.getText().toString();
+
+                // Chuyển đến trang đổi mật khẩu và chuyển tên tài khoản đăng nhập qua Intent
+                Intent intent = new Intent(dangnhap.this, doipass.class);
+                intent.putExtra("username", username);
+                startActivity(intent);
+            }
+        });
     }
 
     private boolean validateLogin(String username, String password) {
-        // Kết nối đến cơ sở dữ liệu
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        try {
+            // Kết nối đến cơ sở dữ liệu
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        // Truy vấn cơ sở dữ liệu để kiểm tra đăng nhập
-        String query = "SELECT * FROM Nguoidung WHERE tentk = ? AND matkhau = ?";
-        Cursor cursor = db.rawQuery(query, new String[]{username, password});
+            // Truy vấn cơ sở dữ liệu để kiểm tra đăng nhập
+            String query = "SELECT * FROM Nguoidung WHERE tentk = ? AND matkhau = ?";
+            Cursor cursor = db.rawQuery(query, new String[]{username, password});
 
-        // Kiểm tra xem dữ liệu có tồn tại trong cơ sở dữ liệu hay không
-        if (cursor.moveToFirst()) {
-            // Đăng nhập thành công
-            cursor.close();
-            db.close();
-            return true;
-        } else {
-            // Đăng nhập thất bại
-            cursor.close();
-            db.close();
+            // Kiểm tra xem dữ liệu có tồn tại trong cơ sở dữ liệu hay không
+            if (cursor.moveToFirst()) {
+                // Đăng nhập thành công
+                cursor.close();
+                db.close();
+                return true;
+            } else {
+                // Đăng nhập thất bại
+                cursor.close();
+                db.close();
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }
 }
-

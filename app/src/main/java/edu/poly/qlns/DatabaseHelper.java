@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Tạo các bảng cơ sở dữ liệu ở đây
         createTables(db);
+        insertSampleUsers(db); // Thêm người dùng mẫu khi tạo cơ sở dữ liệu
     }
 
     @Override
@@ -49,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String createChamCongTable = "CREATE TABLE ChamCong ("
                 + "manv INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "thang INTEGER,"
-                + "ngaycong Date,"
+                + "ngaycong DATE,"
                 + "ngayphep INTEGER,"
                 + "ngoaigio INTEGER"
                 + ");";
@@ -62,6 +63,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "sdt INTEGER"
                 + ");";
         db.execSQL(createPhongBanTable);
+
         // Tạo bảng Người dùng
         String createUsersTable = "CREATE TABLE Nguoidung ("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -69,11 +71,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + "matkhau TEXT"
                 + ");";
         db.execSQL(createUsersTable);
-        addUser(db, "Nguyen van a", "12345678");
-        addUser(db, "user2", "hashed_password2");
-        addUser(db, "user3", "hashed_password3");
-
     }
+
+    public long updatePassword(SQLiteDatabase db, String username, String newPassword) {
+        ContentValues values = new ContentValues();
+        values.put("matkhau", newPassword);
+
+        // Làm việc với cơ sở dữ liệu để cập nhật mật khẩu
+        return db.update("Nguoidung", values, "tentk = ?", new String[]{username});
+    }
+
     public long addUser(SQLiteDatabase db, String username, String hashedPassword) {
         ContentValues values = new ContentValues();
         values.put("tentk", username);
@@ -82,6 +89,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long newRowId = db.insert("Nguoidung", null, values);
         return newRowId;
     }
+    public void insertSampleUsers(SQLiteDatabase db) {
+        // Đảm bảo bạn có chắc chắn là đã tạo bảng Nguoidung với cột tentk và matkhau
+        String createUsersTable = "CREATE TABLE Nguoidung ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "tentk TEXT,"
+                + "matkhau TEXT"
+                + ");";
+        db.execSQL(createUsersTable);
 
+        // Thêm người dùng mẫu
+        addUser(db, "nguyenvana", "1234");
+        addUser(db, "user2", "hashed_password2");
+        addUser(db, "user3", "hashed_password3");
+    }
 
 }

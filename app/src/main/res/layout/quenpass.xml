@@ -53,27 +53,42 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Quên mật khẩu?"
+            android:layout_margin="15dp"
+            android:text="Đặt lại nhập khẩu"
+            android:textAlignment="center"
             android:textColor="#090774"
             android:textSize="27dp"
-            android:textAlignment="center"
             android:textStyle="bold" />
 
         <EditText
             android:id="@+id/editTextText3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
             android:backgroundTint="@android:color/transparent"
             android:ems="10"
             android:inputType="text"
-            android:text="Email" />
+            android:hint="Mật khẩu mới" />
 
-        <TextView
+        <EditText
+            android:id="@+id/editTextText4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="10"
+            android:inputType="text"
+            android:hint="Xác nhận mật khẩu mới" />
+
+        <Button
+            android:id="@+id/buttonChangePassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
             android:background="@drawable/rounded_corner_blue"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
