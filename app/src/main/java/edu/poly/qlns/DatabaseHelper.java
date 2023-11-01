@@ -19,7 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         // Tạo các bảng cơ sở dữ liệu ở đây
         createTables(db);
-        insertSampleUsers(db); // Thêm người dùng mẫu khi tạo cơ sở dữ liệu
     }
 
     @Override
@@ -89,19 +88,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long newRowId = db.insert("Nguoidung", null, values);
         return newRowId;
     }
-    public void insertSampleUsers(SQLiteDatabase db) {
-        // Đảm bảo bạn có chắc chắn là đã tạo bảng Nguoidung với cột tentk và matkhau
-        String createUsersTable = "CREATE TABLE Nguoidung ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "tentk TEXT,"
-                + "matkhau TEXT"
-                + ");";
-        db.execSQL(createUsersTable);
-
-        // Thêm người dùng mẫu
-        addUser(db, "nguyenvana", "1234");
-        addUser(db, "user2", "hashed_password2");
-        addUser(db, "user3", "hashed_password3");
+    public void insertSampleUserData() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tentk", "user1");
+        values.put("matkhau", "password1");
+        db.insert("Nguoidung", null, values);
+        db.close();
     }
 
 }
