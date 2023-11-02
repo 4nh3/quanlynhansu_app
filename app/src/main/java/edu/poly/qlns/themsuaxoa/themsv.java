@@ -1,5 +1,7 @@
 package edu.poly.qlns.themsuaxoa;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.poly.qlns.DatabaseHelper;
 import edu.poly.qlns.NhanVienAdapter;
 import edu.poly.qlns.R;
 import edu.poly.qlns.data.NhanVien;
@@ -64,18 +67,37 @@ public class themsv extends AppCompatActivity {
                 String chucVu = edtChucVu.getText().toString();
                 String maPhongBan = edtMaPhongBan.getText().toString();
 
-                // Tạo đối tượng NhanVien mới
-                NhanVien nhanVien = new NhanVien(maNV, tenNV, ngaySinh, phaiTinh, coGiaDinh, diaChi, soDienThoai, trinhDo, luongCB, ngayLamViec, chucVu, maPhongBan);
+                // Khởi tạo đối tượng DatabaseHelper
+                DatabaseHelper dbHelper = new DatabaseHelper(themsv.this);
 
-                // Thêm đối tượng NhanVien vào danh sách
-                nhanVienList.add(nhanVien);
+                // Lấy đối tượng SQLiteDatabase để ghi dữ liệu
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                // Cập nhật giao diện
-                adapter.notifyDataSetChanged();
+                // Tạo đối tượng ContentValues để chứa dữ liệu cần chèn
+                ContentValues values = new ContentValues();
+                values.put("manv", maNV);
+                values.put("tennv", tenNV);
+                values.put("ngaysinh", ngaySinh);
+                values.put("phaitinh", phaiTinh);
+                values.put("cogiadinh", coGiaDinh);
+                values.put("diachi", diaChi);
+                values.put("sodienthoai", soDienThoai);
+                values.put("trinhdo", trinhDo);
+                values.put("luongcb", luongCB);
+                values.put("ngaylamviec", ngayLamViec);
+                values.put("chucvu", chucVu);
+                values.put("maphongban", maPhongBan);
+
+                // Chèn dữ liệu vào bảng NhanVien
+                long newRowId = db.insert("NhanVien", null, values);
+
+                // Đóng kết nối đến cơ sở dữ liệu
+                db.close();
 
                 // Hiển thị thông báo cho người dùng
                 Toast.makeText(themsv.this, "Thêm nhân viên thành công", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 }
