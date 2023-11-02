@@ -2,8 +2,14 @@ package edu.poly.qlns;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import edu.poly.qlns.data.NhanVien;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -96,6 +102,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert("Nguoidung", null, values);
         db.close();
     }
+    public List<NhanVien> getAllNhanVien() {
+        List<NhanVien> nhanVienList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM NhanVien", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int maNhanVien = cursor.getInt(cursor.getColumnIndex("manv"));
+                String tenNhanVien = cursor.getString(cursor.getColumnIndex("tennv"));
+                String ngaySinh = cursor.getString(cursor.getColumnIndex("ngaysinh"));
+                String gioiTinh = cursor.getString(cursor.getColumnIndex("phaitinh"));
+                String diaChi = cursor.getString(cursor.getColumnIndex("diachi"));
+                String soDienThoai = cursor.getString(cursor.getColumnIndex("sodienthoai"));
+                String coGiaDinh = cursor.getString(cursor.getColumnIndex("cogiadinh"));
+                String trinhDo = cursor.getString(cursor.getColumnIndex("trinhdo"));
+                double luongCB = cursor.getDouble(cursor.getColumnIndex("luongcb"));
+                String ngayLamViec = cursor.getString(cursor.getColumnIndex("ngaylamviec"));
+                String chucVu = cursor.getString(cursor.getColumnIndex("chucvu"));
+                String maPhongBan = cursor.getString(cursor.getColumnIndex("maphongban"));
+
+                NhanVien nhanVien = new NhanVien(maNhanVien, tenNhanVien, ngaySinh, gioiTinh, diaChi, soDienThoai, coGiaDinh, trinhDo, luongCB, ngayLamViec, chucVu, maPhongBan);
+                nhanVienList.add(nhanVien);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return nhanVienList;
+    }
+
 
 
 }
