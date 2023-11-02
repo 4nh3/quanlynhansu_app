@@ -27,6 +27,19 @@
         <activity
             android:name=".MainActivity"
             />
+
+        <activity
+            android:name=".NhanVienAdapter"
+            />
+        <activity
+            android:name=".data.NhanVien"
+            />
+        <activity
+            android:name=".chucnang.nhanvien"
+            />
+        <activity android:name="edu.poly.qlns.themsuaxoa.themsv">
+        </activity>
+
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

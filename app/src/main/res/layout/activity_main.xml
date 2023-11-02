@@ -105,49 +105,59 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="410dp"
-        android:layout_height="409dp"
+        android:layout_width="414dp"
+        android:layout_height="457dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <Button
-            android:id="@+id/btnkhoa"
+            android:id="@+id/btnNV"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:background="@drawable/rounded_button"
-            android:text="KHÓA"
+            android:text="NHÂN VIÊN"
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/btnsv"
+            android:id="@+id/btnPB"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button"
-            android:text="SINH VIÊN"
+            android:text="PHÒNG BAN"
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnCC"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button"
-            android:text="ĐIỂM THI"
+            android:text="CHẤM CÔNG"
             android:textSize="22sp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnLuong"
             android:layout_width="357dp"
             android:layout_height="70dp"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/rounded_button"
-            android:text="ĐIỂM RÈN LUYỆN"
+            android:text="BẢNG LƯƠNG"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btnNH"
+            android:layout_width="357dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button"
+            android:text="NGHỈ HƯU"
             android:textSize="22sp" />
     </LinearLayout>
 

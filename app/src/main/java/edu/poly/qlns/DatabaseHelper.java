@@ -30,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void createTables(SQLiteDatabase db) {
         // Tạo bảng Nhân viên
         String createNhanVienTable = "CREATE TABLE NhanVien ("
-                + "manv INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "manv INTEGER PRIMARY KEY,"
                 + "tennv TEXT,"
                 + "ngaysinh TEXT,"
                 + "phaitinh TEXT,"

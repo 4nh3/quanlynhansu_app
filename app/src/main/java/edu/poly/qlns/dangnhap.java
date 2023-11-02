@@ -32,7 +32,6 @@ public class dangnhap extends AppCompatActivity {
         // Khởi tạo DatabaseHelper
         dbHelper = new DatabaseHelper(this);
 // Thêm người dùng mẫu sau khi đăng nhập thành công
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
                 btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
