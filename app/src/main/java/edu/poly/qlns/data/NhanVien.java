@@ -33,49 +33,95 @@ public class NhanVien {
         return maNhanVien;
     }
 
+    public void setMaNhanVien(int maNhanVien) {
+        this.maNhanVien = maNhanVien;
+    }
+
     public String getTenNhanVien() {
         return tenNhanVien;
+    }
+
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
     public String getNgaySinh() {
         return ngaySinh;
     }
 
-    public String getGioiTinh() {
+    public void setNgaySinh(String ngaySinh) {
+        this.ngaySinh = ngaySinh;
+    }
+
+    public String getPhaiTinh() {
         return gioiTinh;
+    }
+
+    public void setPhaiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getDiaChi() {
         return diaChi;
     }
 
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
+    }
+
     public String getSoDienThoai() {
         return soDienThoai;
+    }
+
+    public void setSoDienThoai(String soDienThoai) {
+        this.soDienThoai = soDienThoai;
     }
 
     public String getCoGiaDinh() {
         return coGiaDinh;
     }
 
+    public void setCoGiaDinh(String coGiaDinh) {
+        this.coGiaDinh = coGiaDinh;
+    }
+
     public String getTrinhDo() {
         return trinhDo;
+    }
+
+    public void setTrinhDo(String trinhDo) {
+        this.trinhDo = trinhDo;
     }
 
     public double getLuongCB() {
         return luongCB;
     }
 
+    public void setLuongCB(double luongCB) {
+        this.luongCB = luongCB;
+    }
+
     public String getNgayLamViec() {
         return ngayLamViec;
+    }
+
+    public void setNgayLamViec(String ngayLamViec) {
+        this.ngayLamViec = ngayLamViec;
     }
 
     public String getChucVu() {
         return chucVu;
     }
 
+    public void setChucVu(String chucVu) {
+        this.chucVu = chucVu;
+    }
+
     public String getMaPhongBan() {
         return maPhongBan;
     }
+
+    public void setMaPhongBan(String maPhongBan) {
+        this.maPhongBan = maPhongBan;
+    }
 }
-
-

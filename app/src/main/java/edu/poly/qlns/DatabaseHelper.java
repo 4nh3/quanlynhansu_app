@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "QuanLyNhanSu.db";
     public static final int DATABASE_VERSION = 1;
 
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -85,7 +86,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Làm việc với cơ sở dữ liệu để cập nhật mật khẩu
         return db.update("Nguoidung", values, "tentk = ?", new String[]{username});
     }
-
     public long addUser(SQLiteDatabase db, String username, String hashedPassword) {
         ContentValues values = new ContentValues();
         values.put("tentk", username);
@@ -130,6 +130,76 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return nhanVienList;
+    }
+    public void deleteNhanVien(NhanVien nhanVien) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int maNV = nhanVien.getMaNhanVien();
+        db.delete("NhanVien", "manv = ?", new String[]{String.valueOf(maNV)});
+        db.close();
+    }
+    public long updateNhanVien(NhanVien nhanVien) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tennv", nhanVien.getTenNhanVien());
+        values.put("ngaysinh", nhanVien.getNgaySinh());
+        values.put("phaitinh", nhanVien.getPhaiTinh());
+        values.put("diachi", nhanVien.getDiaChi());
+        values.put("sodienthoai", nhanVien.getSoDienThoai());
+        values.put("cogiadinh", nhanVien.getCoGiaDinh());
+        values.put("trinhdo", nhanVien.getTrinhDo());
+        values.put("luongcb", String.valueOf(nhanVien.getLuongCB()));
+        values.put("ngaylamviec", nhanVien.getNgayLamViec());
+        values.put("chucvu", nhanVien.getChucVu());
+        values.put("maphongban", nhanVien.getMaPhongBan());
+
+        long result = db.update("NhanVien", values, "manv = ?", new String[]{String.valueOf(nhanVien.getMaNhanVien())});
+        db.close();
+        return result;
+    }
+    public NhanVien getNhanVienByMaNV(int maNhanVien) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] columns = {
+                "manv",
+                "tennv",
+                "ngaysinh",
+                "phaitinh",
+                "diachi",
+                "sodienthoai",
+                "cogiadinh",
+                "trinhdo",
+                "luongcb",
+                "ngaylamviec",
+                "chucvu",
+                "maphongban"
+        };
+        String selection = "manv = ?";
+        String[] selectionArgs = {String.valueOf(maNhanVien)};
+        Cursor cursor = db.query("NhanVien", columns, selection, selectionArgs, null, null, null);
+
+        NhanVien nhanVien = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            int maNV = cursor.getInt(cursor.getColumnIndex("manv"));
+            String tenNV = cursor.getString(cursor.getColumnIndex("tennv"));
+            String ngaySinh = cursor.getString(cursor.getColumnIndex("ngaysinh"));
+            String phaiTinh = cursor.getString(cursor.getColumnIndex("phaitinh"));
+            String diaChi = cursor.getString(cursor.getColumnIndex("diachi"));
+            String soDienThoai = cursor.getString(cursor.getColumnIndex("sodienthoai"));
+            String coGiaDinh = cursor.getString(cursor.getColumnIndex("cogiadinh"));
+            String trinhDo = cursor.getString(cursor.getColumnIndex("trinhdo"));
+            double luongCB = cursor.getDouble(cursor.getColumnIndex("luongcb"));
+            String ngayLamViec = cursor.getString(cursor.getColumnIndex("ngaylamviec"));
+            String chucVu = cursor.getString(cursor.getColumnIndex("chucvu"));
+            String maPhongBan = cursor.getString(cursor.getColumnIndex("maphongban"));
+
+            nhanVien = new NhanVien(maNV, tenNV, ngaySinh, phaiTinh, diaChi, soDienThoai, coGiaDinh, trinhDo, luongCB, ngayLamViec, chucVu, maPhongBan);
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+
+        return nhanVien;
     }
 
 

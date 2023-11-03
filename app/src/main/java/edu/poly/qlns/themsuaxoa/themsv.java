@@ -46,8 +46,12 @@ public class themsv extends AppCompatActivity {
         // Ánh xạ nút "Lưu"
         btnSave = findViewById(R.id.button_luu);
 
-        // Tạo adapter và thiết lập cho danh sách hiển thị (ListView hoặc RecyclerView)
-        adapter = new NhanVienAdapter(this, nhanVienList);
+        DatabaseHelper dbHelper = new DatabaseHelper(this);
+
+        // Khởi tạo adapter và truyền tham số DatabaseHelper
+        adapter = new NhanVienAdapter(this, nhanVienList, dbHelper);
+
+
 
         // Xử lý sự kiện khi nút "Lưu" được nhấn
         btnSave.setOnClickListener(new View.OnClickListener() {

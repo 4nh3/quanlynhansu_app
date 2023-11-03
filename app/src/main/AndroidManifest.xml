@@ -37,8 +37,12 @@
         <activity
             android:name=".chucnang.nhanvien"
             />
-        <activity android:name="edu.poly.qlns.themsuaxoa.themsv">
-        </activity>
+        <activity
+            android:name=".themsuaxoa.themsv"
+            />
+        <activity
+            android:name=".themsuaxoa.suanv"
+            />
 
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
