@@ -24,6 +24,7 @@ public class NhanVienAdapter extends BaseAdapter {
         this.dbHelper = dbHelper; // Gán giá trị dbHelper
     }
 
+
     @Override
     public int getCount() {
         return nhanVienList.size();

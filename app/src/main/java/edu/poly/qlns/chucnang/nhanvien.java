@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import edu.poly.qlns.DatabaseHelper;
+import edu.poly.qlns.EmployeeAdapter;
 import edu.poly.qlns.NhanVienAdapter;
 import edu.poly.qlns.R;
 import edu.poly.qlns.data.NhanVien;
@@ -21,15 +22,16 @@ public class nhanvien extends AppCompatActivity {
 
     private ListView listView;
     private NhanVienAdapter nhanVienAdapter;
+    private EmployeeAdapter employeeAdapter; // Sử dụng biến riêng cho in theo phòng ban
     private TextView themNV;
     private DatabaseHelper databaseHelper;
+    private String selectedPhongBan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nhanvien);
 
-        // Khởi tạo ListView và adapter cho danh sách nhân viên
         listView = findViewById(R.id.NhanVien);
         themNV = findViewById(R.id.tthemNV);
         databaseHelper = new DatabaseHelper(this);
@@ -43,9 +45,22 @@ public class nhanvien extends AppCompatActivity {
             }
         });
 
+        selectedPhongBan = getIntent().getStringExtra("selectedPhongBan");
+
+        if (selectedPhongBan != null) {
+            // Nếu selectedPhongBan không null, chuyển sang chế độ in theo phòng ban
+            loadNhanVienByPhongBan();
+        } else {
+            // Nếu không có selectedPhongBan, ở chế độ in tất cả nhân viên
+            loadAllNhanVien();
+        }
+    }
+
+    private void loadAllNhanVien() {
         List<NhanVien> nhanVienList = databaseHelper.getAllNhanVien();
-        nhanVienAdapter = new NhanVienAdapter(this, nhanVienList, databaseHelper); // Truyền thêm tham số databaseHelper
+        nhanVienAdapter = new NhanVienAdapter(this, nhanVienList, databaseHelper);
         listView.setAdapter(nhanVienAdapter);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -58,11 +73,39 @@ public class nhanvien extends AppCompatActivity {
         });
     }
 
+    private void loadNhanVienByPhongBan() {
+        List<DatabaseHelper.Employee> employeeList = databaseHelper.getNhanVienByPhongBan(selectedPhongBan);
+
+        if (employeeList != null && !employeeList.isEmpty()) {
+            EmployeeAdapter adapter = new EmployeeAdapter(this, employeeList);
+            listView.setAdapter(adapter);
+
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    DatabaseHelper.Employee selectedNhanVien = employeeList.get(position);
+                    Intent intent = new Intent(nhanvien.this, suanv.class);
+                    intent.putExtra("edit_manv", selectedNhanVien.getMaNhanVien());
+                    intent.putExtra("edit_tennv", selectedNhanVien.getTenNhanVien());
+                    startActivity(intent);
+                }
+            });
+        } else {
+            // Xử lý trường hợp không có dữ liệu trong Cursor, ví dụ thông báo hoặc hiển thị thông tin khác.
+        }
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
-        // Cập nhật danh sách nhân viên khi quay lại màn hình
-        List<NhanVien> nhanVienList = databaseHelper.getAllNhanVien();
-        nhanVienAdapter.updateData(nhanVienList);
+
+        if (selectedPhongBan != null) {
+            // Nếu ở chế độ in theo phòng ban
+            loadNhanVienByPhongBan();
+        } else {
+            // Nếu không có selectedPhongBan, ở chế độ in tất cả nhân viên
+            loadAllNhanVien();
+        }
     }
 }
