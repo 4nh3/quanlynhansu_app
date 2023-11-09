@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Tiêu đề của danh sách -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Danh sách nhân viên nghỉ hưu"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:background="#2196F3"
+        android:textColor="#FFFFFF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Nhập năm" />
+
+        <Button
+            android:id="@+id/buttonClickHere"
+            android:onClick="onButtonClick"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Tìm" />
+
+    </LinearLayout>
+
+    <!-- Header cho danh sách -->
+    <LinearLayout
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#E0E0E0"
+        android:padding="8dp">
+
+        <!-- Cột STT -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="STT"
+            android:textStyle="bold" />
+
+        <!-- Cột Mã nhân viên (manv) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Mã NV"
+            android:textStyle="bold" />
+
+        <!-- Cột Họ tên nhân viên (hotennv) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Họ tên NV"
+            android:textStyle="bold" />
+
+        <!-- Cột Phái tính (phaitinh) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Phái tính"
+            android:textStyle="bold" />
+
+        <!-- Cột Ngày sinh (ngaysinh) -->
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Ngày sinh"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Danh sách nhân viên nghỉ hưu -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <!-- Cột STT -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/textStt" />
+
+    <!-- Cột Mã nhân viên (manv) -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:id="@+id/manvnh" />
+
+    <!-- Cột Họ tên nhân viên (hotennv) -->
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:id="@+id/hotennh" />
+
+    <!-- Cột Phái tính (phaitinh) -->
+    <TextView
+        android:id="@+id/phaitinhnh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2" />
+
+    <!-- Cột Ngày sinh (ngaysinh) -->
+    <TextView
+        android:id="@+id/ngaysinhnh"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3" />
+</LinearLayout>

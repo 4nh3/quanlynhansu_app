@@ -44,6 +44,9 @@
             android:name=".chucnang.phongban"
             />
         <activity
+            android:name=".chucnang.nghihuu"
+            />
+        <activity
             android:name=".themsuaxoa.themsv"
             />
         <activity
