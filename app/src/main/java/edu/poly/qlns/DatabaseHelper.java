@@ -209,32 +209,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void insertSampleData() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.clear();
 
         // Đưa dữ liệu mẫu vào bảng Nhân viên
-        values.put("manv", "001");
-        values.put("tennv", "Nguyen Van A");
-        values.put("ngaysinh", "1990-01-01");
-        values.put("phaitinh", "Nam");
-        values.put("cogiadinh", "Có gia đình");
-        values.put("diachi", "123 Đường ABC");
-        values.put("sodienthoai", "0123456789");
-        values.put("trinhdo", "Cử nhân");
-        values.put("luongcb", "10000000");
-        values.put("ngaylamviec", "2023-10-01");
-        values.put("chucvu", "Nhân viên");
-        values.put("maphongban", "BGD");
-        db.insert("NhanVien", null, values);
+//        values.put("manv", "002");
+//        values.put("tennv", "Nguyen Van b");
+//        values.put("ngaysinh", "1990-01-01");
+//        values.put("phaitinh", "Nam");
+//        values.put("cogiadinh", "Có gia đình");
+//        values.put("diachi", "123 Đường ABC");
+//        values.put("sodienthoai", "0123456789");
+//        values.put("trinhdo", "Cử nhân");
+//        values.put("luongcb", "10000000");
+//        values.put("ngaylamviec", "2023-10-01");
+//        values.put("chucvu", "Nhân viên");
+//        values.put("maphongban", "BGD");
+//        db.insert("NhanVien", null, values);
 
 //         Đưa dữ liệu mẫu vào bảng Chấm công
-        values.clear();
-        values.put("manv", 1);
-        values.put("thang", 10);
-        values.put("ngaycong", "2023-10-01");
-        values.put("ngayphep", 2);
-        values.put("ngoaigio", 0);
-        db.insert("ChamCong", null, values);
+//        values.clear();
+//        values.put("manv", 1);
+//        values.put("thang", 10);
+//        values.put("ngaycong", "2023-10-01");
+//        values.put("ngayphep", 2);
+//        values.put("ngoaigio", 0);
+//        db.insert("ChamCong", null, values);
 
 //         Đưa dữ liệu mẫu vào bảng Phòng ban
+//        values.clear();
 
 //        values.put("mapb", "HCH");
 //        values.put("tenpb", "Phong Hanh Chinh");
@@ -254,11 +256,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        db.insert("PhongBan", null, values);
 //        db.close();
 
-        values.put("mapb", "KTH");
-        values.put("tenpb", "Phong Ki Thuat");
-        values.put("sdt", "0987944321");
-        db.insert("PhongBan", null, values);
-        db.close();
+//        values.put("mapb", "KTH");
+//        values.put("tenpb", "Phong Ki Thuat");
+//        values.put("sdt", "0987944321");
+//        db.insert("PhongBan", null, values);
+//        db.close();
 
 //        values.put("mapb", "KTO");
 //        values.put("tenpb", "Phong Ke Toan");

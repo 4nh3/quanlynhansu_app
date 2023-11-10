@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         // Chèn dữ liệu mẫu vào bảng Nguoidung
         dbHelper.insertSampleUserData("user1", "password1");
         dbHelper.insertSampleUserData("user2", "password2");
-//        dbHelper.insertSampleData();
+        dbHelper.insertSampleData();
 
         btnNhanVien = findViewById(R.id.btnNV); // Tìm button "NHÂN VIÊN" bằng ID
         btnPhongBan = findViewById(R.id.btnPB); // Tìm button "NHÂN VIÊN" bằng ID
