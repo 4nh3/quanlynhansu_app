@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import edu.poly.qlns.DatabaseHelper;
 import edu.poly.qlns.R;
+import edu.poly.qlns.chucnang.HienThiChamCong;
+import edu.poly.qlns.chucnang.chamcong;
 import edu.poly.qlns.chucnang.nghihuu;
 import edu.poly.qlns.chucnang.nhanvien;
 import edu.poly.qlns.chucnang.phongban;
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnPhongBan;
 
     private Button btnNghiHuu;
+    private Button btnChamCong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnNhanVien = findViewById(R.id.btnNV); // Tìm button "NHÂN VIÊN" bằng ID
         btnPhongBan = findViewById(R.id.btnPB); // Tìm button "NHÂN VIÊN" bằng ID
         btnNghiHuu = findViewById(R.id.btnNH); // Tìm button "NHÂN VIÊN" bằng ID
+        btnChamCong = findViewById(R.id.btnCC); // Tìm button "NHÂN VIÊN" bằng ID
 
         // Đặt lệnh lắng nghe sự kiện click cho button "NHÂN VIÊN"
         btnNhanVien.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
                 Intent intent = new Intent(MainActivity.this, nghihuu.class);
+                startActivity(intent);
+            }
+        });
+        btnChamCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(MainActivity.this, HienThiChamCong.class);
                 startActivity(intent);
             }
         });

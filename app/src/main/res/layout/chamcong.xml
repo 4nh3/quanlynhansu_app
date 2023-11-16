@@ -22,16 +22,9 @@
                 android:text="BẢNG CHẤM CÔNG NHÂN VIÊN THÁNG" />
 
             <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:id="@+id/spinnerThang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
@@ -45,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="STT" />
+                android:text="MANV" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -77,10 +70,16 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/listView"
+            android:id="@+id/listView_ChamCong"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_luuchamcong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lưu" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

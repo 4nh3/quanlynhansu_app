@@ -15,7 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Tên cơ sở dữ liệu và phiên bản
     public static final String DATABASE_NAME = "QuanLyNhanSu.db";
-    public static final int DATABASE_VERSION = 4;
+    public static final int DATABASE_VERSION = 5;
     private SQLiteDatabase db;
 
 
@@ -57,14 +57,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Tạo bảng Chấm công
         String createChamCongTable = "CREATE TABLE ChamCong ("
-                + "manv INTEGER,"
+                + "manv INTEGER PRIMARY KEY,"
                 + "thang INTEGER,"
-                + "ngaycong DATE,"
+                + "ngaycong INTEGER,"
                 + "ngayphep INTEGER,"
                 + "ngoaigio INTEGER,"
                 + "FOREIGN KEY (manv) REFERENCES NhanVien(manv)"
                 + ");";
         db.execSQL(createChamCongTable);
+
 
         // Tạo bảng Phòng ban
         String createPhongBanTable = "CREATE TABLE PhongBan ("
@@ -136,6 +137,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return nhanVienList;
     }
+
+
     public void deleteNhanVien(NhanVien nhanVien) {
         SQLiteDatabase db = this.getWritableDatabase();
         int maNV = nhanVien.getMaNhanVien();
@@ -211,7 +214,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.clear();
 
-        // Đưa dữ liệu mẫu vào bảng Nhân viên
+//        // Đưa dữ liệu mẫu vào bảng Nhân viên
 //        values.put("manv", "002");
 //        values.put("tennv", "Nguyen Van b");
 //        values.put("ngaysinh", "1990-01-01");
@@ -225,19 +228,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        values.put("chucvu", "Nhân viên");
 //        values.put("maphongban", "BGD");
 //        db.insert("NhanVien", null, values);
-
-//         Đưa dữ liệu mẫu vào bảng Chấm công
+//
+////         Đưa dữ liệu mẫu vào bảng Chấm công
 //        values.clear();
 //        values.put("manv", 1);
 //        values.put("thang", 10);
-//        values.put("ngaycong", "2023-10-01");
+//        values.put("ngaycong", "20");
 //        values.put("ngayphep", 2);
 //        values.put("ngoaigio", 0);
 //        db.insert("ChamCong", null, values);
-
-//         Đưa dữ liệu mẫu vào bảng Phòng ban
+//
+////         Đưa dữ liệu mẫu vào bảng Phòng ban
 //        values.clear();
-
+//
 //        values.put("mapb", "HCH");
 //        values.put("tenpb", "Phong Hanh Chinh");
 //        values.put("sdt", "0987954321");
@@ -255,13 +258,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        values.put("sdt", "0997954321");
 //        db.insert("PhongBan", null, values);
 //        db.close();
-
+//
 //        values.put("mapb", "KTH");
 //        values.put("tenpb", "Phong Ki Thuat");
 //        values.put("sdt", "0987944321");
 //        db.insert("PhongBan", null, values);
 //        db.close();
-
+//
 //        values.put("mapb", "KTO");
 //        values.put("tenpb", "Phong Ke Toan");
 //        values.put("sdt", "0987954321");
@@ -338,6 +341,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return nhanVienList;
+    }
+
+    public void addChamCong(int maNV, int thang, int ngayCong, int ngayPhep, int ngoaiGio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        String sql = "INSERT INTO chamcong (manv, thang, ngaycong, ngayphep, ngoaigio) VALUES (?, ?, ?, ?, ?)";
+        Object[] bindArgs = {maNV, thang, ngayCong, ngayPhep, ngoaiGio};
+
+        db.execSQL(sql, bindArgs);
+        db.close();
+    }
+
+    // Thêm phương thức getAllPhongBanNames để lấy danh sách tên phòng ban
+    public List<String> getAllPhongBanNames() {
+        List<String> phongBanList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT tenpb FROM PhongBan", null);
+
+        while (cursor.moveToNext()) {
+            String tenPhongBan = cursor.getString(cursor.getColumnIndex("tenpb"));
+            phongBanList.add(tenPhongBan);
+        }
+
+        cursor.close();
+        db.close();
+        return phongBanList;
     }
 
 }
