@@ -1,7 +1,5 @@
 package edu.poly.qlns.chucnang;
 
-
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import edu.poly.qlns.DatabaseHelper;
 import edu.poly.qlns.MainActivity;
 import edu.poly.qlns.R;
@@ -37,16 +34,14 @@ public class HienThiChamCong extends AppCompatActivity {
         listViewChamCong = findViewById(R.id.listView_HienThiChamCong);
         spinnerThang = findViewById(R.id.spinnerThang_HienThi);
         databaseHelper = new DatabaseHelper(this);
-        Button btnThemChamCong = findViewById(R.id.btnThemChamCong); // Tìm button "NHÂN VIÊN" bằng ID
+        Button btnThemChamCong = findViewById(R.id.btnThemChamCong);
         spinnerPhongBan = findViewById(R.id.spinnerPhongBan);
         loadThangToSpinner();
         loadPhongBanToSpinner();
 
-        // Lắng nghe sự kiện khi giá trị của Spinner thay đổi
         spinnerThang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Load dữ liệu chấm công theo tháng và phòng ban được chọn
                 loadChamCongByThangAndPhongBan(
                         (int) spinnerThang.getSelectedItem(),
                         spinnerPhongBan.getSelectedItem().toString()
@@ -58,11 +53,10 @@ public class HienThiChamCong extends AppCompatActivity {
                 // Do nothing here
             }
         });
-        // Lắng nghe sự kiện khi giá trị của Spinner Phòng Ban thay đổi
+
         spinnerPhongBan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // Load dữ liệu chấm công theo tháng và phòng ban được chọn
                 loadChamCongByThangAndPhongBan(
                         (int) spinnerThang.getSelectedItem(),
                         spinnerPhongBan.getSelectedItem().toString()
@@ -74,51 +68,79 @@ public class HienThiChamCong extends AppCompatActivity {
                 // Do nothing here
             }
         });
+
         btnThemChamCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
                 Intent intent = new Intent(HienThiChamCong.this, chamcong.class);
                 startActivity(intent);
             }
         });
-
     }
 
     private void loadThangToSpinner() {
-        // Tạo một mảng dữ liệu cho Spinner (1 đến 12 là các tháng)
-        Integer[] thangArray = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-
-        // Tạo một ArrayAdapter để hiển thị dữ liệu trong Spinner
+        Integer[] thangArray = new Integer[]{0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         ArrayAdapter<Integer> thangAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, thangArray);
-
-        // Đặt kiểu dropdown cho Spinner
         thangAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Đặt Adapter cho Spinner
         spinnerThang.setAdapter(thangAdapter);
     }
 
     // Thêm phương thức loadPhongBanToSpinner để load danh sách phòng ban vào Spinner Phòng Ban
     private void loadPhongBanToSpinner() {
-        phongBanList = databaseHelper.getAllPhongBanNames();
+        // Khởi tạo phongBanList nếu chưa được khởi tạo
+        if (phongBanList == null) {
+            phongBanList = new ArrayList<>();
+        }
+
+        // Xóa các phần tử cũ trước khi thêm mới để tránh trùng lặp
+        phongBanList.clear();
+
+        // Thêm giá trị "All" vào danh sách
+        phongBanList.add("All");
+
+        // Thêm danh sách phòng ban từ database vào phongBanList
+        phongBanList.addAll(databaseHelper.getAllPhongBanNames());
+
         ArrayAdapter<String> phongBanAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, phongBanList);
         phongBanAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPhongBan.setAdapter(phongBanAdapter);
     }
 
-    // Thêm phương thức loadChamCongByThangAndPhongBan để lọc dữ liệu chấm công theo tháng và phòng ban
+
     private void loadChamCongByThangAndPhongBan(int selectedThang, String selectedPhongBan) {
-        // Thực hiện lệnh SQL để lấy dữ liệu chấm công và thông tin nhân viên theo tháng và phòng ban
-        String query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio " +
-                "FROM ChamCong " +
-                "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
-                "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb " +
-                "WHERE ChamCong.thang = ? AND PhongBan.tenpb = ?";
+        String query;
 
-        cursor = databaseHelper.getWritableDatabase().rawQuery(query, new String[]{String.valueOf(selectedThang), selectedPhongBan});
+        if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio " +
+                    "FROM ChamCong " +
+                    "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
+                    "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb";
+        } else if ("All".equals(selectedPhongBan)) {
+            query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio " +
+                    "FROM ChamCong " +
+                    "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
+                    "WHERE (ChamCong.thang = ? OR ? = 0)";
+        } else {
+            query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio " +
+                    "FROM ChamCong " +
+                    "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
+                    "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb " +
+                    "WHERE (ChamCong.thang = ? OR ? = 0) AND PhongBan.tenpb = ?";
+        }
 
-        // Tạo một adapter để hiển thị dữ liệu từ Cursor
+        String[] selectionArgs;
+
+        // Adjust the number of placeholders in the query based on the conditions
+        if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            selectionArgs = new String[]{};
+        } else if ("All".equals(selectedPhongBan)) {
+            selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang)};
+        } else {
+            selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang), selectedPhongBan};
+        }
+
+        cursor = databaseHelper.getWritableDatabase().rawQuery(query, selectionArgs);
+
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(
                 this,
                 R.layout.item_hienthichamcong,
@@ -127,10 +149,7 @@ public class HienThiChamCong extends AppCompatActivity {
                 new int[]{R.id.textViewMaNV_HienThi, R.id.textViewNgayCong_HienThi, R.id.textViewNgayPhep_HienThi, R.id.textViewNgoaiGio_HienThi}
         );
 
-        // Thiết lập adapter cho ListView
         listViewChamCong.setAdapter(adapter);
     }
 
-
 }
-

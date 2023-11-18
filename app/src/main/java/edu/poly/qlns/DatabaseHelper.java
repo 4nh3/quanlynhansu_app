@@ -59,14 +59,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         // Tạo bảng Chấm công
         String createChamCongTable = "CREATE TABLE ChamCong ("
-                + "manv INTEGER PRIMARY KEY,"
+                + "manv INTEGER,"
                 + "thang INTEGER,"
                 + "ngaycong INTEGER,"
                 + "ngayphep INTEGER,"
                 + "ngoaigio INTEGER,"
+                + "PRIMARY KEY (manv, thang),"
                 + "FOREIGN KEY (manv) REFERENCES NhanVien(manv)"
                 + ");";
         db.execSQL(createChamCongTable);
+
 
 
         // Tạo bảng Phòng ban
