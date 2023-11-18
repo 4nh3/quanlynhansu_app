@@ -3,11 +3,11 @@ package edu.poly.qlns.data;
 public class ChamCong {
     private int maNhanVien;
     private int thang;
-    private String ngayCong;
+    private int ngayCong;
     private int ngayPhep;
     private int ngoaiGio;
 
-    public ChamCong(int maNhanVien, int thang, String ngayCong, int ngayPhep, int ngoaiGio) {
+    public ChamCong(int maNhanVien, int thang, int ngayCong, int ngayPhep, int ngoaiGio) {
         this.maNhanVien = maNhanVien;
         this.thang = thang;
         this.ngayCong = ngayCong;
@@ -31,11 +31,11 @@ public class ChamCong {
         this.thang = thang;
     }
 
-    public String getNgayCong() {
+    public int getNgayCong() {
         return ngayCong;
     }
 
-    public void setNgayCong(String ngayCong) {
+    public void setNgayCong(int ngayCong) {
         this.ngayCong = ngayCong;
     }
 

@@ -1,0 +1,30 @@
+<resources>
+    <!-- Mảng tháng -->
+    <string-array name="thang_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+
+        <!-- Thêm các tháng khác tương ứng vào đây -->
+    </string-array>
+
+    <!-- Mảng phòng ban -->
+    <string-array name="phongban_array">
+        <item>BGD</item>
+        <item>HCH</item>
+        <item>KDO</item>
+        <item>KTH</item>
+        <item>KTO</item>
+
+        <!-- Thêm các phòng ban khác tương ứng vào đây -->
+    </string-array>
+</resources>

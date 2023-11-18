@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.poly.qlns.data.ChamCong;
+import edu.poly.qlns.data.Luong;
 import edu.poly.qlns.data.NhanVien;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -368,5 +370,87 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return phongBanList;
     }
+    public ChamCong getChamCongByMaNV(int maNV) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ChamCong chamCong = null;
 
+        String[] columns = {"manv", "thang", "ngaycong", "ngayphep", "ngoaigio"};
+        String selection = "manv = ?";
+        String[] selectionArgs = {String.valueOf(maNV)};
+        Cursor cursor = db.query("ChamCong", columns, selection, selectionArgs, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int manv = cursor.getInt(cursor.getColumnIndex("manv"));
+            int thang = cursor.getInt(cursor.getColumnIndex("thang"));
+            int ngayCong = cursor.getInt(cursor.getColumnIndex("ngaycong"));
+            int ngayPhep = cursor.getInt(cursor.getColumnIndex("ngayphep"));
+            int ngoaiGio = cursor.getInt(cursor.getColumnIndex("ngoaigio"));
+
+            chamCong = new ChamCong(manv, thang, ngayCong, ngayPhep, ngoaiGio);
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+        db.close();
+
+        return chamCong;
+    }
+    public List<String> getAllDepartments() {
+        List<String> departmentList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Viết truy vấn SQL để lấy tên các phòng ban từ bảng phòng ban (hoặc bảng tương ứng)
+        String selectQuery = "SELECT mapb FROM phongban"; // Thay 'departments' bằng tên bảng thực tế
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // Lặp qua tất cả các dòng trong Cursor để lấy tên phòng ban và thêm vào danh sách
+        if (cursor.moveToFirst()) {
+            do {
+                String departmentName = cursor.getString(cursor.getColumnIndex("mapb")); // Thay 'department_name' bằng tên cột trong bảng chứa tên phòng ban
+                departmentList.add(departmentName);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return departmentList;
+    }
+    public List<Luong> getDataByMonthAndDepartment(int thang, String mapb) {
+        List<Luong> luongDataList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Viết truy vấn SQL để lấy dữ liệu từ bảng tương ứng dựa trên tháng và phòng ban
+        String selectQuery = "SELECT cc.*, nv.*, pb.* FROM ChamCong cc " +
+                "INNER JOIN NhanVien nv ON cc.manv = nv.manv " +
+                "INNER JOIN PhongBan pb ON nv.maphongban = pb.mapb " +
+                "WHERE cc.thang = ? AND pb.mapb = ?";
+
+        // Thực hiện truy vấn sử dụng PreparedStatement để tránh lỗi SQL injection
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(thang), mapb});
+
+        // Lặp qua tất cả các dòng trong Cursor để lấy dữ liệu và thêm vào danh sách
+        if (cursor.moveToFirst()) {
+            do {
+                Luong luongData = new Luong();
+
+                // Đọc dữ liệu từ Cursor và gán vào đối tượng LuongData
+                luongData.setTenNhanVien(cursor.getString(cursor.getColumnIndex("tennv")));
+                luongData.setChucVu(cursor.getString(cursor.getColumnIndex("chucvu")));
+                luongData.setLuongCoBan(cursor.getDouble(cursor.getColumnIndex("luongcb")));
+//                luongData.setLuongThucLanh(cursor.getDouble(cursor.getColumnIndex("thuclanh")));
+                // ...
+
+                // Thêm đối tượng LuongData vào danh sách
+                luongDataList.add(luongData);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return luongDataList;
+    }
 }

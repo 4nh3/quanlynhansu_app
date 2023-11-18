@@ -58,9 +58,19 @@
         <activity
             android:name=".chucnang.HienThiChamCong"
             />
+        <activity
+            android:name=".chucnang.luong"
+            />
+        <activity
+            android:name=".data.Luong"
+            />
+        <activity
+            android:name=".LuongAdapter"
+            />
 
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
 </manifest>
