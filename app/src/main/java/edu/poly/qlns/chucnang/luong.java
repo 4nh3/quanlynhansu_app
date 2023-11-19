@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -105,28 +106,34 @@ public class luong extends AppCompatActivity {
         try {
             String query;
 
+
             if ("All".equals(selectedPhongBan) && selectedThang == 0) {
-                query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio, " +
-                        "SUM(NhanVien.luongcb * (ChamCong.ngaycong + ChamCong.ngoaigio * 2 - ChamCong.ngayphep) / 26) AS tongluong " +
+                query = "SELECT ChamCong.manv AS _id, " +
+                        "NhanVien.tennv, " +
+                        "NhanVien.chucvu, " +
+                        "NhanVien.luongcb, " +
+                        "SUM(NhanVien.luongcb * 2 / 26) AS tongluong " +
                         "FROM ChamCong " +
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
-                        "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb";
+                        "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb " +
+                        "GROUP BY ChamCong.manv, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb;";
             } else if ("All".equals(selectedPhongBan)) {
-                query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio, " +
-                        "SUM(NhanVien.luongcb * (ChamCong.ngaycong + ChamCong.ngoaigio * 2 - ChamCong.ngayphep) / 26) AS tongluong " +
+                query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb, " +
+                        "SUM(NhanVien.luongcb * 2 / 26) AS tongluong " +
                         "FROM ChamCong " +
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
                         "WHERE (ChamCong.thang = ? OR ? = 0) " +
-                        "GROUP BY ChamCong.manv, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio";
+                        "GROUP BY ChamCong.manv, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb;";
             } else {
-                query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio, " +
-                        "SUM(NhanVien.luongcb * (ChamCong.ngaycong + ChamCong.ngoaigio * 2 - ChamCong.ngayphep) / 26) AS tongluong " +
+                query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb, " +
+                        "SUM(NhanVien.luongcb * 2 / 26) AS tongluong " +
                         "FROM ChamCong " +
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
                         "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb " +
                         "WHERE (ChamCong.thang = ? OR ? = 0) AND PhongBan.tenpb = ? " +
-                        "GROUP BY ChamCong.manv, NhanVien.tennv, ChamCong.ngaycong, ChamCong.ngayphep, ChamCong.ngoaigio";
+                        "GROUP BY ChamCong.manv, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb;";
             }
+
 
 
             String[] selectionArgs;
@@ -145,10 +152,11 @@ public class luong extends AppCompatActivity {
             // LoadChamCongByThangAndPhongBan method
             SimpleCursorAdapter adapter = new SimpleCursorAdapter(
                     this,
-                    R.layout.item_hienthiluong2,
+                    R.layout.item_hienthiluong,
                     cursor,
-                    new String[]{"tennv", "ngaycong", "ngayphep", "ngoaigio", "tongluong"},
-                    new int[]{R.id.textViewMaNV_HienThi, R.id.textViewNgayCong_HienThi, R.id.textViewNgayPhep_HienThi, R.id.textViewNgoaiGio_HienThi, R.id.textViewTongLuong_HienThi}
+                    new String[]{"tennv", "chucvu", "luongcb", "tongluong"},
+
+                    new int[]{R.id.textViewHoTen, R.id.textViewChucVu, R.id.textViewLuongCoBan, R.id.textViewThucLanh}
             );
 
 
@@ -160,9 +168,9 @@ public class luong extends AppCompatActivity {
             // Gọi hàm tính lương và hiển thị kết quả
             tinhVaHienThiLuong(selectedThang, selectedPhongBan);
         } finally {
-            if (cursor != null && !cursor.isClosed()) {
-                cursor.close();
-            }
+//            if (cursor != null && !cursor.isClosed()) {
+//                cursor.close();
+//            }
         }
     }
 
@@ -171,12 +179,24 @@ public class luong extends AppCompatActivity {
         // Thực hiện tính lương theo logic bạn đã định nghĩa
         double luong = tinhLuong(selectedThang, selectedPhongBan);
 
-        // Hiển thị kết quả tính lương bằng Toast
-        Toast.makeText(this, "Lương tháng " + selectedThang + " của " + selectedPhongBan + " là: " + luong, Toast.LENGTH_SHORT).show();
+        // Tham chiếu đến TextView có ID là textView_tongtatcaluong
+        TextView textViewLuong = findViewById(R.id.textView_tongtatcaluong);
 
-        // Hoặc bạn có thể cập nhật một TextView để hiển thị kết quả
-        // ví dụ: textViewLuong.setText("Lương tháng " + selectedThang + " của " + selectedPhongBan + " là: " + luong);
+        // Kiểm tra xem textViewLuong có tồn tại không
+        if (textViewLuong != null) {
+            // Hiển thị kết quả tính lương trong TextView
+            if (selectedThang == 0){
+                textViewLuong.setText("Lương của tất cả tháng và  "  + selectedPhongBan + "phòng ban là: " + luong);
+
+            }else {
+                textViewLuong.setText("Lương tháng " + selectedThang + " của  " + selectedPhongBan + "phòng ban là: " + luong);
+            }
+        } else {
+            // Nếu textViewLuong không tồn tại, bạn có thể thông báo hoặc xử lý theo cách khác
+            Toast.makeText(this, "Không tìm thấy TextView_tongtatcaluong", Toast.LENGTH_SHORT).show();
+        }
     }
+
 
     // Phương thức tính lương
     private double tinhLuong(int selectedThang, String selectedPhongBan) {
