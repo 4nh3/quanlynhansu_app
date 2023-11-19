@@ -8,11 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.poly.qlns.data.ChamCong;
-import edu.poly.qlns.data.Luong;
 import edu.poly.qlns.data.NhanVien;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -430,40 +428,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
 
         return departmentList;
-    }
-    public List<Luong> getDataByMonthAndDepartment(int thang, String mapb) {
-        List<Luong> luongDataList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        // Viết truy vấn SQL để lấy dữ liệu từ bảng tương ứng dựa trên tháng và phòng ban
-        String selectQuery = "SELECT cc.*, nv.*, pb.* FROM ChamCong cc " +
-                "INNER JOIN NhanVien nv ON cc.manv = nv.manv " +
-                "INNER JOIN PhongBan pb ON nv.maphongban = pb.mapb " +
-                "WHERE cc.thang = ? AND pb.mapb = ?";
-
-        // Thực hiện truy vấn sử dụng PreparedStatement để tránh lỗi SQL injection
-        Cursor cursor = db.rawQuery(selectQuery, new String[]{String.valueOf(thang), mapb});
-
-        // Lặp qua tất cả các dòng trong Cursor để lấy dữ liệu và thêm vào danh sách
-        if (cursor.moveToFirst()) {
-            do {
-                Luong luongData = new Luong();
-
-                // Đọc dữ liệu từ Cursor và gán vào đối tượng LuongData
-                luongData.setTenNhanVien(cursor.getString(cursor.getColumnIndex("tennv")));
-                luongData.setChucVu(cursor.getString(cursor.getColumnIndex("chucvu")));
-                luongData.setLuongCoBan(cursor.getDouble(cursor.getColumnIndex("luongcb")));
-//                luongData.setLuongThucLanh(cursor.getDouble(cursor.getColumnIndex("thuclanh")));
-                // ...
-
-                // Thêm đối tượng LuongData vào danh sách
-                luongDataList.add(luongData);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-
-        return luongDataList;
     }
 }

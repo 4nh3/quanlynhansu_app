@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/textViewMaNV_HienThi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="MaNV" />
+
+    <TextView
+        android:id="@+id/textViewNgayCong_HienThi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ngày Công" />
+
+    <TextView
+        android:id="@+id/textViewNgayPhep_HienThi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ngày Phép" />
+
+    <TextView
+        android:id="@+id/textViewNgoaiGio_HienThi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ngoài Giờ" />
+
+    <TextView
+        android:id="@+id/textViewTongLuong_HienThi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ngoài Giờ" />
+</LinearLayout>
