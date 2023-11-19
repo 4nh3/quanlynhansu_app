@@ -5,8 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import edu.poly.qlns.data.ChamCong;
@@ -370,32 +372,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return phongBanList;
     }
-    public ChamCong getChamCongByMaNV(int maNV) {
+    public ChamCong getChamCongByMaNV(int maNhanVien) {
         SQLiteDatabase db = this.getReadableDatabase();
         ChamCong chamCong = null;
 
         String[] columns = {"manv", "thang", "ngaycong", "ngayphep", "ngoaigio"};
         String selection = "manv = ?";
-        String[] selectionArgs = {String.valueOf(maNV)};
+        String[] selectionArgs = {String.valueOf(maNhanVien)};
+        Log.d("DatabaseHelperDebug", "MaNV: " + maNhanVien);
+
         Cursor cursor = db.query("ChamCong", columns, selection, selectionArgs, null, null, null);
 
-        if (cursor != null && cursor.moveToFirst()) {
-            int manv = cursor.getInt(cursor.getColumnIndex("manv"));
-            int thang = cursor.getInt(cursor.getColumnIndex("thang"));
-            int ngayCong = cursor.getInt(cursor.getColumnIndex("ngaycong"));
-            int ngayPhep = cursor.getInt(cursor.getColumnIndex("ngayphep"));
-            int ngoaiGio = cursor.getInt(cursor.getColumnIndex("ngoaigio"));
-
-            chamCong = new ChamCong(manv, thang, ngayCong, ngayPhep, ngoaiGio);
-        }
-
         if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int manv = cursor.getInt(cursor.getColumnIndex("manv"));
+                int thang = cursor.getInt(cursor.getColumnIndex("thang"));
+                int ngayCong = cursor.getInt(cursor.getColumnIndex("ngaycong"));
+                int ngayPhep = cursor.getInt(cursor.getColumnIndex("ngayphep"));
+                int ngoaiGio = cursor.getInt(cursor.getColumnIndex("ngoaigio"));
+
+                chamCong = new ChamCong(manv, thang, ngayCong, ngayPhep, ngoaiGio);
+            } else {
+                // Log ra để kiểm tra nếu không có dữ liệu
+                Log.d("DatabaseHelperDebug", "Không tìm thấy dữ liệu cho MaNV: " + maNhanVien);
+            }
             cursor.close();
+        } else {
+            // Log ra nếu cursor null
+            Log.d("DatabaseHelperDebug", "Cursor is null");
         }
+
         db.close();
 
         return chamCong;
     }
+
     public List<String> getAllDepartments() {
         List<String> departmentList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

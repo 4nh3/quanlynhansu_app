@@ -90,32 +90,30 @@ public class luong extends AppCompatActivity {
 
     // Phương thức lọc dữ liệu dựa trên lựa chọn từ Spinner
     private void filterData() {
-        int selectedMonth = spinnerThang.getSelectedItemPosition()+1;
-
+        int selectedMonth = spinnerThang.getSelectedItemPosition() + 1;
         String selectedDepartment = spinnerPhongBan.getSelectedItem().toString();
 
         List<Luong> filteredData = databaseHelper.getDataByMonthAndDepartment(selectedMonth, selectedDepartment);
 
         Log.d("SpinnerDebug", "Tháng được chọn: " + selectedMonth + ", Phòng ban được chọn: " + selectedDepartment);
 
-
         if (filteredData.isEmpty()) {
-            // Nếu danh sách rỗng, không cần cập nhật adapter
-            // Có thể thông báo cho người dùng hoặc thực hiện các hành động khác
-            // Ví dụ:
+            // Xử lý khi danh sách rỗng
             Toast.makeText(this, "Không có dữ liệu để hiển thị", Toast.LENGTH_SHORT).show();
         } else {
-            // Nếu danh sách không rỗng, tiến hành cập nhật hoặc gán dữ liệu cho adapter
+            Luong luongObj = new Luong(databaseHelper);
+            filteredData = luongObj.tinhLuongNhanVien(filteredData); // Tính toán thu nhập thực lãnh và cập nhật vào danh sách filteredData
+
             if (adapter == null) {
-                // Nếu adapter chưa được khởi tạo, tạo mới và gán dữ liệu cho adapter
                 adapter = new LuongAdapter(this, R.layout.item_luong, filteredData);
                 listView.setAdapter(adapter);
             } else {
-                // Nếu adapter đã tồn tại, chỉ cần cập nhật dữ liệu và thông báo cho adapter biết để hiển thị lại dữ liệu mới
-                adapter.clear(); // Xóa dữ liệu cũ trong adapter
-                adapter.addAll(filteredData); // Thêm dữ liệu mới vào adapter
-                adapter.notifyDataSetChanged(); // Thông báo cho adapter biết đã thay đổi dữ liệu
+                adapter.clear();
+                adapter.addAll(filteredData);
+                adapter.notifyDataSetChanged();
             }
         }
     }
+
 }
+

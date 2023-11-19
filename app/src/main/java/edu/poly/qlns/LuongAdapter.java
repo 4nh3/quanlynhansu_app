@@ -44,8 +44,9 @@ public class LuongAdapter extends ArrayAdapter<Luong> {
         textViewHoTen.setText(luong.getTenNhanVien()); // Họ tên
         textViewChucVu.setText(luong.getChucVu()); // Chức vụ
         textViewLuongCoBan.setText(String.valueOf(luong.getLuongCoBan())); // Lương cơ bản
-        textViewThucLanh.setText(String.valueOf(luong.getLuongThucLanh())); // Thực lãnh
-
+        //textViewThucLanh.setText(String.valueOf(luong.getLuongThucLanh())); // Thực lãnh
+        double thucLanh = luong.getLuongThucLanh();
+        textViewThucLanh.setText(String.valueOf(thucLanh)); // Thực lãnh
         return view;
     }
 }

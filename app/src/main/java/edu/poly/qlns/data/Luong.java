@@ -1,6 +1,9 @@
 package edu.poly.qlns.data;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import edu.poly.qlns.DatabaseHelper;
 
@@ -11,50 +14,77 @@ public class Luong {
     private String chucVu;
     private double luongCoBan;
     private double luongThucLanh;
-
     public Luong() {
-        // Khởi tạo đối tượng Luong
+        // Khởi tạo đối tượng Luong với các giá trị mặc định hoặc logic cần thiết
+    }
+    public static Luong createFromChamCong(ChamCong chamCong) {
+        Luong luongMoi = new Luong();
+        luongMoi.setMaNhanVien(chamCong.getMaNhanVien());
+        // Thiết lập các thông tin khác cần thiết từ đối tượng ChamCong
+        // Ví dụ: luongMoi.setTenNhanVien(chamCong.getTenNhanVien());
+        //       luongMoi.setChucVu(chamCong.getChucVu());
+        //       luongMoi.setLuongCoBan(chamCong.getLuongCoBan());
+        //       luongMoi.setLuongThucLanh(chamCong.getLuongThucLanh());
+        return luongMoi;
     }
     public Luong(DatabaseHelper dbHelper) {
         this.databaseHelper = dbHelper;
     }
 
     // Phương thức tính lương và thực lãnh dựa trên công thức đã cung cấp
-    public List<Double> tinhLuongNhanVien() {
-        List<Double> thucLanhList = new ArrayList<>();
+    public List<Luong> tinhLuongNhanVien(List<Luong> luongList) {
+        List<Luong> result = new ArrayList<>();
 
-        // Lấy danh sách các nhân viên từ bảng ChamCong
-        List<NhanVien> nhanVienList = databaseHelper.getAllNhanVien();
+        for (Luong luong : luongList) {
+            int maNV = luong.getMaNhanVien();
+            Log.d("LuongDebug", "MaNV: " + luong.getMaNhanVien());
 
-        // Lặp qua từng nhân viên để tính toán lương và thực lãnh dựa trên công thức đã đề xuất
-        for (NhanVien nhanVien : nhanVienList) {
-            int maNV = nhanVien.getMaNhanVien();
-
-            // Lấy thông tin chấm công từ bảng ChamCong
-            ChamCong chamCong = databaseHelper.getChamCongByMaNV(maNV);
+            ChamCong chamCong = databaseHelper.getChamCongByMaNV(luong.getMaNhanVien());
 
             if (chamCong != null) {
                 int ngayCong = chamCong.getNgayCong();
                 int ngayPhep = chamCong.getNgayPhep();
                 int ngoaiGio = chamCong.getNgoaiGio();
+                double luongCB = luong.getLuongCoBan();
 
-                // Lấy lương cơ bản từ bảng NhanVien
-                double luongCB = nhanVien.getLuongCB();
+                double tam = luongCB * (ngayCong + ngoaiGio * 2 - ngayPhep) / 26;
+                double thucLanh = tam - (tam * 0.1);
 
-                // Thực hiện tính toán theo công thức để tính lương và thực lãnh
-                double luong = luongCB * (ngayCong + ngoaiGio * 2 - ngayPhep) / 26;
-                double thucLanh = luong - (luong * 0.1); // Giảm 10% thuế
+                // Tạo một đối tượng Luong mới và cập nhật thông tin thu nhập thực lãnh
+                Luong luongMoi = Luong.createFromChamCong(chamCong);
+                luongMoi.setTenNhanVien(luong.getTenNhanVien());
+                luongMoi.setChucVu(luong.getChucVu());
+                luongMoi.setLuongCoBan(luong.getLuongCoBan());
+                luongMoi.setLuongThucLanh(thucLanh);
 
-                // Thêm dữ liệu thực lãnh của nhân viên vào danh sách
-                thucLanhList.add(thucLanh);
+                // Thêm đối tượng Luong mới vào danh sách kết quả
+                result.add(luongMoi);
             }
         }
 
-        return thucLanhList;
+        return result;
     }
+
+
 
     public String getTenNhanVien() {
         return tenNhanVien;
+    }
+    private int maNV;
+
+    // Phương thức getter cho maNV
+    public int getMaNhanVien() {
+        return this.maNV; // Trả về giá trị maNV từ đối tượng Luong hiện tại
+    }
+
+    // Phương thức setter cho maNV
+    public void setMaNhanVien(int maNhanVien) {
+        this.maNV = maNhanVien;
+    }
+
+    // Khởi tạo maNV
+    public Luong(int maNV) {
+        this.maNV = maNV;
     }
 
     public void setTenNhanVien(String tenNhanVien) {
