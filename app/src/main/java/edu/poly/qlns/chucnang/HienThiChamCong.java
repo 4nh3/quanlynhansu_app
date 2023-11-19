@@ -43,7 +43,7 @@ public class HienThiChamCong extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 loadChamCongByThangAndPhongBan(
-                        (int) spinnerThang.getSelectedItem(),
+                        position, // Sử dụng vị trí của item thay vì giá trị
                         spinnerPhongBan.getSelectedItem().toString()
                 );
             }
@@ -58,7 +58,7 @@ public class HienThiChamCong extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 loadChamCongByThangAndPhongBan(
-                        (int) spinnerThang.getSelectedItem(),
+                        spinnerThang.getSelectedItemPosition(), // Sử dụng vị trí của item thay vì giá trị
                         spinnerPhongBan.getSelectedItem().toString()
                 );
             }
@@ -79,8 +79,8 @@ public class HienThiChamCong extends AppCompatActivity {
     }
 
     private void loadThangToSpinner() {
-        Integer[] thangArray = new Integer[]{0,1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
-        ArrayAdapter<Integer> thangAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, thangArray);
+        String[] thangArray = new String[]{"All", "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"};
+        ArrayAdapter<String> thangAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, thangArray);
         thangAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerThang.setAdapter(thangAdapter);
     }
