@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,12 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
-    private Button btnNhanVien;
-    private Button btnPhongBan;
+    private ImageButton btnNhanVien;
+    private ImageButton btnPhongBan;
 
-    private Button btnNghiHuu;
-    private Button btnChamCong;
-    private Button btnLuong;
+    private ImageButton btnNghiHuu;
+    private ImageButton btnChamCong;
+    private ImageButton btnLuong;
 
 
     @Override

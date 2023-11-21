@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Qlns"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".dangnhap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +24,9 @@
         <activity
             android:name=".doipass"
             />
-<!--        <activity-->
-<!--            android:name=".MainActivity"-->
-<!--            />-->
+        <activity
+            android:name=".MainActivity"
+            />
 
         <activity
             android:name=".NhanVienAdapter"
@@ -61,12 +61,11 @@
         <activity
             android:name=".chucnang.luong"
             />
-        <activity
-            android:name=".data.Luong"
-            />
-        <activity
-            android:name=".LuongAdapter"
-            />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
 
     </application>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />

@@ -71,7 +71,7 @@ public class luong extends AppCompatActivity {
     }
 
     private void loadThangToSpinner() {
-        String[] thangArray = new String[]{"All", "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"};
+        String[] thangArray = new String[]{"Tất cả", "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"};
         ArrayAdapter<String> thangAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, thangArray);
         thangAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerThang.setAdapter(thangAdapter);
@@ -88,7 +88,7 @@ public class luong extends AppCompatActivity {
         phongBanList.clear();
 
         // Thêm giá trị "All" vào danh sách
-        phongBanList.add("All");
+        phongBanList.add("Tất cả");
 
         // Thêm danh sách phòng ban từ database vào phongBanList
         phongBanList.addAll(databaseHelper.getAllPhongBanNames());
@@ -107,7 +107,7 @@ public class luong extends AppCompatActivity {
             String query;
 
 
-            if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            if ("Tất cả".equals(selectedPhongBan) && selectedThang == 0) {
                 query = "SELECT ChamCong.manv AS _id, " +
                         "NhanVien.tennv, " +
                         "NhanVien.chucvu, " +
@@ -117,7 +117,7 @@ public class luong extends AppCompatActivity {
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
                         "INNER JOIN PhongBan ON NhanVien.maphongban = PhongBan.mapb " +
                         "GROUP BY ChamCong.manv, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb;";
-            } else if ("All".equals(selectedPhongBan)) {
+            } else if ("Tất cả".equals(selectedPhongBan)) {
                 query = "SELECT ChamCong.manv AS _id, NhanVien.tennv, NhanVien.chucvu, NhanVien.luongcb, " +
                         "SUM(NhanVien.luongcb * 2 / 26) AS tongluong " +
                         "FROM ChamCong " +
@@ -139,9 +139,9 @@ public class luong extends AppCompatActivity {
             String[] selectionArgs;
 
             // Adjust the number of placeholders in the query based on the conditions
-            if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            if ("Tất cả".equals(selectedPhongBan) && selectedThang == 0) {
                 selectionArgs = new String[]{};
-            } else if ("All".equals(selectedPhongBan)) {
+            } else if ("Tất cả".equals(selectedPhongBan)) {
                 selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang)};
             } else {
                 selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang), selectedPhongBan};
@@ -208,11 +208,11 @@ public class luong extends AppCompatActivity {
             // Tính tổng lương theo logic bạn đã định nghĩa
             String query;
 
-            if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            if ("Tất cả".equals(selectedPhongBan) && selectedThang == 0) {
                 query = "SELECT SUM(NhanVien.luongcb * (ChamCong.ngaycong + ChamCong.ngoaigio * 2 - ChamCong.ngayphep) / 26) AS tongluong " +
                         "FROM ChamCong " +
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv";
-            } else if ("All".equals(selectedPhongBan)) {
+            } else if ("Tất cả".equals(selectedPhongBan)) {
                 query = "SELECT SUM(NhanVien.luongcb * (ChamCong.ngaycong + ChamCong.ngoaigio * 2 - ChamCong.ngayphep) / 26) AS tongluong " +
                         "FROM ChamCong " +
                         "INNER JOIN NhanVien ON ChamCong.manv = NhanVien.manv " +
@@ -227,9 +227,9 @@ public class luong extends AppCompatActivity {
 
             String[] selectionArgs;
 
-            if ("All".equals(selectedPhongBan) && selectedThang == 0) {
+            if ("Tất cả".equals(selectedPhongBan) && selectedThang == 0) {
                 selectionArgs = new String[]{};
-            } else if ("All".equals(selectedPhongBan)) {
+            } else if ("Tất cả".equals(selectedPhongBan)) {
                 selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang)};
             } else {
                 selectionArgs = new String[]{String.valueOf(selectedThang), String.valueOf(selectedThang), selectedPhongBan};

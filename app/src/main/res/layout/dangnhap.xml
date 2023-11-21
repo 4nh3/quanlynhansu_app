@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backroud_login"
+    android:background="#252F6A"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="60dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/logo_truong"
+            android:layout_marginBottom="-25dp"
             android:gravity="center_vertical"
             android:textAlignment="center" />
 
@@ -30,6 +31,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/anton"
             android:text="CTEC"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -40,16 +42,26 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="408dp"
+        android:layout_height="460dp"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bachground_login"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.23000002">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="60dp"
+            android:fontFamily="@font/anton"
+            android:gravity="center"
+            android:text="ĐĂNG NHẬP"
+            android:textSize="40dp" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="73dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
@@ -73,17 +85,18 @@
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
-                android:textColorHint="@color/white"
-                android:inputType="text"
+                android:fontFamily="@font/gafata"
                 android:hint="Tên tài khoản"
+                android:inputType="text"
                 android:textColor="#E8E0E0"
+                android:textColorHint="@color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="69dp"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
             android:layout_marginBottom="10dp"
@@ -106,11 +119,12 @@
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="@android:color/transparent"
                 android:ems="10"
-                android:inputType="text"
+                android:fontFamily="@font/gafata"
                 android:hint="Mật khẩu"
-                android:textColorHint="@color/white"
+                android:inputType="text"
 
                 android:textColor="#E8E0E0"
+                android:textColorHint="@color/white"
                 android:textSize="20sp" />
 
             <TextView
@@ -147,7 +161,7 @@
             android:layout_marginLeft="50dp"
             android:text="Quên mật khẩu"
             android:textAlignment="viewStart"
-            android:textColor="@color/white" />
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

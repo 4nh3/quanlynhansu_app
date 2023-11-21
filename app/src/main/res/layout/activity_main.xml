@@ -79,7 +79,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LÊ THỊ TRANG ANH"
+                android:text="Quản Lý Nhân Sự"
                 android:textColor="@color/white"
                 android:textSize="24dp"
                 android:textStyle="bold" />
@@ -88,7 +88,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Công nghệ thông tin"
+                android:text="CTEC"
                 android:textColor="@color/white"
 
                 android:textSize="16dp" />
@@ -99,7 +99,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_margin="10dp"
-            android:src="@drawable/avt2" />
+            android:src="@drawable/logo_truong" />
 
     </LinearLayout>
 
@@ -111,54 +111,136 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
-        <Button
-            android:id="@+id/btnNV"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:background="@drawable/rounded_button"
-            android:text="NHÂN VIÊN"
-            android:textSize="22sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnPB"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="PHÒNG BAN"
-            android:textSize="22sp" />
+            <LinearLayout
+                android:layout_width="172dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnCC"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="CHẤM CÔNG"
-            android:textSize="22sp" />
+                <ImageButton
+                    android:id="@+id/btnNV"
+                    android:layout_width="115dp"
+                    android:layout_height="101dp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/icon4"
+                    android:textSize="22sp" />
 
-        <Button
-            android:id="@+id/btnLuong"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="BẢNG LƯƠNG"
-            android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:text="Nhân Viên" />
+            </LinearLayout>
 
-        <Button
-            android:id="@+id/btnNH"
-            android:layout_width="357dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_button"
-            android:text="NGHỈ HƯU"
-            android:textSize="22sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnPB"
+                    android:layout_width="115dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="70dp"
+                    android:background="@drawable/phongban"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:text="Phòng Ban" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="174dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnCC"
+                    android:layout_width="115dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="25dp"
+                    android:background="@drawable/chamcong"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:text="Chấm Công" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="242dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnLuong"
+                    android:layout_width="115dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="75dp"
+                    android:background="@drawable/luong"
+                    android:text="BẢNG LƯƠNG"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/alatsi"
+                    android:gravity="center"
+                    android:text="Bảng Lương" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="176dp"
+            android:layout_height="140dp"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/btnNH"
+                android:layout_width="115dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/nghihuu"
+                android:text="NGHỈ HƯU"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/textView23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/alatsi"
+                android:gravity="center"
+                android:text="Nghỉ Hưu" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

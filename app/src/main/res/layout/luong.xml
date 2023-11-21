@@ -13,6 +13,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#8DC0E8"
+            android:padding="16dp"
+
             android:orientation="horizontal">
 
             <TextView
@@ -47,28 +50,36 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="HỌ VÀ TÊN" />
+                android:background="#BDBCBC"
+                android:text="HỌ VÀ TÊN"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="CHỨC VỤ" />
+                android:background="#BDBCBC"
+                android:text="CHỨC VỤ"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="LƯƠNG CƠ BẢN" />
+                android:background="#BDBCBC"
+                android:text="LƯƠNG CƠ BẢN"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="THỰC LÃNH" />
+                android:background="#BDBCBC"
+                android:text="THỰC LÃNH"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <ListView

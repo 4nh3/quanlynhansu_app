@@ -7,12 +7,14 @@ public class ChamCong {
     private int ngayPhep;
     private int ngoaiGio;
 
+
     public ChamCong(int maNhanVien, int thang, int ngayCong, int ngayPhep, int ngoaiGio) {
         this.maNhanVien = maNhanVien;
         this.thang = thang;
         this.ngayCong = ngayCong;
         this.ngayPhep = ngayPhep;
         this.ngoaiGio = ngoaiGio;
+        
     }
 
     public int getMaNhanVien() {
@@ -54,4 +56,6 @@ public class ChamCong {
     public void setNgoaiGio(int ngoaiGio) {
         this.ngoaiGio = ngoaiGio;
     }
+
+
 }
