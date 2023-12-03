@@ -1,5 +1,6 @@
 package edu.poly.qlns.chucnang;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -27,6 +29,12 @@ public class luong extends AppCompatActivity {
     private Spinner spinnerThang, spinnerPhongBan;
     private List<String> phongBanList;
     private DatabaseHelper databaseHelper;
+    private LinearLayout btnNhanVien;
+    private LinearLayout btnPhongBan;
+
+    private LinearLayout btnNghiHuu;
+    private LinearLayout btnChamCong;
+    private LinearLayout btnLuong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,52 @@ public class luong extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
         loadPhongBanToSpinner();
         loadThangToSpinner();
+        btnNhanVien = findViewById(R.id.nhanvien);
+        btnPhongBan = findViewById(R.id.trangchu);
+        btnNghiHuu = findViewById(R.id.nghihuu);
+        btnChamCong = findViewById(R.id.chamcong);
+        btnLuong = findViewById(R.id.bangluong);
+        // Đặt lệnh lắng nghe sự kiện click cho button "NHÂN VIÊN"
+        btnNhanVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(luong.this, nhanvien.class);
+                startActivity(intent);
+            }
+        });
+        btnPhongBan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(luong.this, phongban.class);
+                startActivity(intent);
+            }
+        });
+        btnNghiHuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(luong.this, nghihuu.class);
+                startActivity(intent);
+            }
+        });
+        btnChamCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(luong.this, HienThiChamCong.class);
+                startActivity(intent);
+            }
+        });
+        btnLuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(luong.this, luong.class);
+                startActivity(intent);
+            }
+        });
 
         // Đặt sự kiện khi chọn tháng
         spinnerThang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

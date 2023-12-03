@@ -286,7 +286,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        values.put("sdt", "0983954321");
 //        db.insert("PhongBan", null, values);
 //        db.close();
-//
+////
 //        values.put("mapb", "KDO");
 //        values.put("tenpb", "Phong Kinh Doanh");
 //        values.put("sdt", "0997954321");

@@ -13,16 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#8EC4EF"
+            android:background="#D9EBFA"
             android:padding="16dp"
-            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#95CFEA"
+                android:background="#D9EBFA"
+                android:fontFamily="@font/abeezee"
                 android:text="BẢNG CHẤM CÔNG NHÂN VIÊN THÁNG" />
 
             <Spinner
@@ -42,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#BFBDBD"
+                android:background="#E3E2E2"
                 android:text="MANV"
                 android:textStyle="bold" />
 
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#BFBDBD"
+                android:background="#E3E2E2"
                 android:text="HỌ VÀ TÊN"
                 android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#BFBDBD"
+                android:background="#E3E2E2"
                 android:text="NGÀY CÔNG"
                 android:textStyle="bold" />
 
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#BFBDBD"
+                android:background="#E3E2E2"
                 android:text="NGÀY PHÉP"
                 android:textStyle="bold" />
 
@@ -78,7 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#BFBDBD"
+                android:background="#E3E2E2"
                 android:text="NGOÀI GIỜ"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -94,6 +94,141 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lưu" />
+
+
     </LinearLayout>
+<!--    <LinearLayout-->
+<!--        android:id="@+id/linearLayout6"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="#FFFFFF"-->
+<!--        android:orientation="horizontal"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent">-->
+
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/trangchu"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="7dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView148"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/phongban"-->
+<!--                android:gravity="center_horizontal" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView152"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="Trang chủ" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/nhanvien"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="7dp"-->
+<!--            android:clickable="true"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView114"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/icon4"-->
+<!--                android:gravity="center_horizontal" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView115"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="Nhân viên" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/chamcong"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="7dp"-->
+<!--            android:clickable="true"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView164"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/chamcong"-->
+<!--                android:gravity="center_horizontal" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView125"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="Chấm công" />-->
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/bangluong"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="7dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView144"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/luong"-->
+<!--                android:gravity="center_horizontal" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView154"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="Bảng lương" />-->
+
+
+<!--        </LinearLayout>-->
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/nghihuu"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="7dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView1124"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:background="@drawable/nghihuu"-->
+<!--                android:gravity="center_horizontal" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/textView12154"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="center_horizontal"-->
+<!--                android:text="Nghỉ hưu" />-->
+
+<!--        </LinearLayout>-->
+<!--    </LinearLayout>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

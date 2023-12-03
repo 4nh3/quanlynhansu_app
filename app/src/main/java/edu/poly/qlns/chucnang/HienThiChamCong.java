@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -25,6 +26,12 @@ public class HienThiChamCong extends AppCompatActivity {
     private Spinner spinnerThang;
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
+    private LinearLayout btnNhanVien;
+    private LinearLayout btnPhongBan;
+
+    private LinearLayout btnNghiHuu;
+    private LinearLayout btnChamCong;
+    private LinearLayout btnLuong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +45,52 @@ public class HienThiChamCong extends AppCompatActivity {
         spinnerPhongBan = findViewById(R.id.spinnerPhongBan);
         loadThangToSpinner();
         loadPhongBanToSpinner();
+        btnNhanVien = findViewById(R.id.nhanvien);
+        btnPhongBan = findViewById(R.id.trangchu);
+        btnNghiHuu = findViewById(R.id.nghihuu);
+        btnChamCong = findViewById(R.id.chamcong);
+        btnLuong = findViewById(R.id.bangluong);
+        // Đặt lệnh lắng nghe sự kiện click cho button "NHÂN VIÊN"
+        btnNhanVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(HienThiChamCong.this, nhanvien.class);
+                startActivity(intent);
+            }
+        });
+        btnPhongBan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(HienThiChamCong.this, phongban.class);
+                startActivity(intent);
+            }
+        });
+        btnNghiHuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(HienThiChamCong.this, nghihuu.class);
+                startActivity(intent);
+            }
+        });
+        btnChamCong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(HienThiChamCong.this, HienThiChamCong.class);
+                startActivity(intent);
+            }
+        });
+        btnLuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Khi button "NHÂN VIÊN" được nhấn, chuyển đến trang NhanVien
+                Intent intent = new Intent(HienThiChamCong.this, luong.class);
+                startActivity(intent);
+            }
+        });
 
         spinnerThang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

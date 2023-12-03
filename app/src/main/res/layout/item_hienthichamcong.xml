@@ -7,9 +7,8 @@
 
     <TextView
         android:id="@+id/textViewMaNV_HienThi"
-        android:layout_width="0dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:text="MaNV" />
 
     <TextView

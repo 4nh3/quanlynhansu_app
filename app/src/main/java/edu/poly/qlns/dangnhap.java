@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.poly.qlns.chucnang.phongban;
+
 public class dangnhap extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
@@ -78,7 +80,7 @@ public class dangnhap extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 // Đăng nhập thành công
                 // Chuyển đến trang đổi mật khẩu và chuyển tên tài khoản đăng nhập qua Intent
-                Intent intent = new Intent(dangnhap.this, MainActivity.class);
+                Intent intent = new Intent(dangnhap.this, phongban.class);
                 startActivity(intent);
                 cursor.close();
                 db.close();
